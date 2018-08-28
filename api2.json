@@ -1,0 +1,29 @@
+{
+
+  "privilege" : ["admin"],
+  "request":{
+    "method" : "GET",
+    "uri" : "http://baidu.com/storelist",
+    "headers" : [
+      {"name" : "aaa","type" : "string","remark" : "test"},
+      {"name" : "bbb","type" : "int","remark" : "test"}
+    ],
+    "body" : [
+      {"name" : "aaa","type" : "string","remark" : "test"},
+      {"name" : "bbb","type" : "int","remark" : "test"}
+    ],
+     "params" : [
+      {"name" : "aaa","type" : "string","remark" : "test"},
+      {"name" : "bbb","type" : "int","remark" : "test"}
+    ]
+
+  },
+  "process" : {
+    "type" : "proxy",
+    "api" : [
+      {"method" : "GET","uri" : "http://baidu.com","params" : {"aaa":"$aaa"},"parser" : "defaultParser" , "key" : "storeinfo"},
+      {"method" : "GET","uri" : "http://baidu.com","body" : {"bbb" : "$bbb"}, "key" : "baidu"}
+    ]
+
+  }
+}

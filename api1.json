@@ -1,0 +1,41 @@
+{
+  "request":{
+    "method" : "GET",
+    "uri" : "http://baidu.com/storelist",
+    "headers" : [
+      {"name" : "aaa","type" : "string","remark" : "test"},
+      {"name" : "bbb","type" : "int","remark" : "test"}
+    ],
+    "body" : [
+      {"name" : "ccc","type" : "string","remark" : "test"},
+      {"name" : "ddd","type" : "int","remark" : "test"}
+    ],
+     "params" : [
+      {"name" : "eee","type" : "string","remark" : "test"},
+      {"name" : "ffff","type" : "int","remark" : "test"}
+    ]
+
+  },
+  "process" : {
+    "type" : "sql",
+    "check_func" : [
+      {"name" : "checkStoreExist","params" : {"a" : "$aaa", "b" : "$bbb"}},
+      {"name" : "checkStringLength","params" : {"v" : "$aaa", "start" : 0,"end" : 10}}
+    ],
+    "format_func" : [
+      {"name" : "dateFormat","params" : {"date" : "$date"},"modify" : "$aaa"}
+    ],
+    "query" : {
+      "db" : {
+        "type" : "mysql",
+        "host" : "127.0.0.1",
+        "port" : "3306",
+        "db" : "test"
+      },
+      "sql" : "select * from test $aaa $bbb $ffff"
+    }
+  },
+  "response" : {
+      "response_func" : ["def hellWord(data): {  print('hello')} "]
+    }
+}
